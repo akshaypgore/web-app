@@ -61,15 +61,26 @@ spec:
 
         stage ('Checkout') {
           steps {
-            container ('jnlp') {
-              checkout scm
-              checkout scm: [
-                    $class: 'GitSCM',
-                    branches: [[name: 'master']], // Or your desired branch
-                    userRemoteConfigs: [[url: 'https://github.com/akshaypgore/deploy-app']]
-                ]
+                script {
+                    // Checkout Repository 1 into 'repo1_dir'
+                    dir('app-code') {
+                        checkout(
+                          [$class: 'GitSCM',
+                            branches: [[name: 'master']],
+                            userRemoteConfigs:[[url: 'https://github.com/your-org/repo1.git']]]
+                        )
+                    }
+
+                    // Checkout Repository 2 into 'repo2_dir'
+                    dir('env-code') {
+                        checkout([$class: 'GitSCM',
+                        branches: [[name: 'master']],
+                        userRemoteConfigs: [[url: 'https://github.com/your-org/repo2.git']]])
+                    }
+
+                    // Add more repositories as needed
+                }
             }
-          }
         }
 
         stage('Helm Install') {
