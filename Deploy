@@ -82,7 +82,7 @@ spec:
                             helm repo update
                             if [ "${params.ENVIRONMENT}" = 'dev' ]; then
                                 echo "Using development version"
-                                helm template --install httpd helm-charts/app --version 1.2.0 --values service-config.yaml --values dev.yaml --namespace ${params.ENVIRONMENT}
+                                helm template helm-charts/app --version 1.2.0 --values service-config.yaml --values dev.yaml --namespace ${params.ENVIRONMENT}
                             else
                                 echo "prod"
                             fi
