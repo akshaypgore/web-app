@@ -68,7 +68,7 @@ spec:
         stage ('Checkout namespace repo') {
           steps {
                     git url: 'https://github.com/akshaypgore/deploy-app',
-                        branch: 'master', // Or your desired branch
+                        branch: 'master'
                 }
         }
 
