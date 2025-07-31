@@ -78,7 +78,7 @@ spec:
                     script {
                         sh """
                             helm version
-                            helm repo add helm-charts https://akshaypgore.github.io/helm-charts
+                            helm repo add helm-charts http://akshaypgore.github.io/helm-charts
                             helm repo list
                             ls -l env_code
                             helm repo update
