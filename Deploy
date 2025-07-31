@@ -59,24 +59,17 @@ spec:
             }
         }
 
-        stage ('Checkout') {
+        stage ('Checkout app repo') {
           steps {
-                script {
-                    dir('app-code') {
-                        checkout(
-                          [$class: 'GitSCM',
-                            branches: [[name: 'master']],
-                            userRemoteConfigs:[[url: 'https://github.com/akshaypgore/web-app']]]
-                        )
-                    }
-
-                    dir('env-code') {
-                        checkout([$class: 'GitSCM',
-                        branches: [[name: 'master']],
-                        userRemoteConfigs: [[url: 'https://github.com/akshaypgore/deploy-app']]])
-                    }
+                    checkout scm
                 }
-            }
+        }
+
+        stage ('Checkout namespace repo') {
+          steps {
+                    git url: 'https://github.com/akshaypgore/deploy-app',
+                        branch: 'master', // Or your desired branch
+                }
         }
 
         stage('Helm Install') {
