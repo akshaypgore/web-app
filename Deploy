@@ -62,14 +62,6 @@ spec:
         stage ('Checkout') {
           steps {
                 script {
-                    dir('app-code') {
-                        checkout(
-                          [$class: 'GitSCM',
-                            branches: [[name: 'master']],
-                            userRemoteConfigs:[[url: 'https://github.com/akshaypgore/web-app']]]
-                        )
-                    }
-
                     dir('env-code') {
                         checkout([$class: 'GitSCM',
                         branches: [[name: 'master']],
