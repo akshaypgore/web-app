@@ -66,8 +66,7 @@ spec:
                         checkout(
                           [$class: 'GitSCM',
                             branches: [[name: 'master']],
-                            // userRemoteConfigs:[[url: 'https://github.com/akshaypgore/web-app']]]
-                          ]
+                            userRemoteConfigs:[[url: 'https://github.com/akshaypgore/web-app']]]
                         )
                     }
 
