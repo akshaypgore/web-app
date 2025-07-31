@@ -79,8 +79,9 @@ spec:
                         sh """
                             helm version
                             helm repo add helm-charts https://akshaypgore.github.io/helm-charts
-                            helm repo update
+                            helm repo list
                             ls -l env_code
+                            helm repo update
                             if [ "${params.ENVIRONMENT}" = 'dev' ]; then
                                 echo "Using development version"
                                 helm template helm-charts/app --version 1.2.0 --values service-config.yaml --values ./env_code/dev.yaml --namespace ${params.ENVIRONMENT}
