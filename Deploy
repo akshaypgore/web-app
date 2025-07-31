@@ -58,18 +58,18 @@ spec:
                 echo "Using version: ${params.VERSION}"
             }
         }
-
-        stage ('Checkout app repo') {
-          steps {
+        
+        stage('Checkout Repositories') {
+            steps {
+                script {
                     checkout scm
-                }
-        }
 
-        stage ('Checkout namespace repo') {
-          steps {
-                    git url: 'https://github.com/akshaypgore/deploy-app',
-                        branch: 'master'
+                    dir('env_code') {
+                        git branch: 'master',
+                        url: 'https://github.com/akshaypgore/deploy-app' // URL of the second repository
+                    }
                 }
+            }
         }
 
         stage('Helm Install') {
