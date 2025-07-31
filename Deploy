@@ -80,11 +80,11 @@ spec:
                             helm version
                             helm repo add helm-charts https://akshaypgore.github.io/helm-charts/
                             helm repo update
-                            if [ "${params.VERSION}" = 'dev' ]; then
+                            if [ "${params.ENVIRONMENT}" = 'dev' ]; then
                                 echo "Using development version"
                                 helm template --install httpd helm-charts/app --version 1.2.0 --values service-config.yaml --values dev.yaml --namespace ${params.ENVIRONMENT}
                             else
-                                helm upgrade --install httpd helm-charts/app --version 1.2.0 --values service-config.yaml --namespace ${params.ENVIRONMENT}
+                                echo "prod"
                             fi
                         """
                     }
