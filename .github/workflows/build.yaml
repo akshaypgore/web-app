@@ -68,6 +68,12 @@ jobs:
       - name: Test
         run: |
           docker run --rm akshaygore/web-app:test nginx -t
+          if [ $? -eq 0 ]; then
+              echo "Nginx config is correct"
+          else
+              echo "Nginx config is incorrect"
+              exit 1
+          fi
       -
         name: Build and push
         uses: docker/build-push-action@v6
