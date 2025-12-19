@@ -21,15 +21,14 @@ jobs:
       - 
         name: Read version from file
         id: get_version
-        run: echo "version=$(cat version.txt)" >> "$GITHUB_OUTPUT"
-      -
-        name: Read current version
-        id: current_version
         run: |
-          git show HEAD~1:version.txt
+          echo "current_version=$(cat version.txt)" >> "$GITHUB_OUTPUT"
+          echo "upstream_version=$(git show HEAD~1:version.txt") >> "$GITHUB_OUTPUT"
       -
-        name: Print version from file
-        run: echo "${{ steps.get_version.outputs.version }}"
+        name: Print versions
+        run: |
+          echo "${{ steps.get_version.outputs.current_version }}"
+          echo "${{ steps.get_version.outputs.upstream_version }}"
       # -
       #   name: Set up QEMU
       #   uses: docker/setup-qemu-action@v3
