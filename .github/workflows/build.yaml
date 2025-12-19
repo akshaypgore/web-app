@@ -29,6 +29,30 @@ jobs:
         run: |
           echo "${{ steps.get_version.outputs.current_version }}"
           echo "${{ steps.get_version.outputs.upstream_version }}"
+      -
+        name: Compare versions
+        run: |
+          is_greater() {
+              local ver1=$1
+              local ver2=$2
+              if [ "$(printf '%s\n' "$ver1" "$ver2" | sort -V | head -n1)" = "$ver2" ] && [ "$ver1" != "$ver2" ]; then
+                  # This condition is met if ver2 is smaller, meaning ver1 is greater
+                  return 0
+              else
+                  # This condition is met if ver1 is smaller or equal to ver2
+                  return 1
+              fi
+          }
+
+          # Call the function and act on the result
+          if is_greater "${{ steps.get_version.outputs.upstream_version }}" "${{ steps.get_version.outputs.current_version }}"; then
+              echo "Success: Current version is greater than the required minimum."
+              # Proceed with your application logic here
+          else
+              echo "Failure: Current version is less than or same as the required minimum. Exiting."
+              # Exit the script with a failure status
+              exit 1
+          fi
       # -
       #   name: Set up QEMU
       #   uses: docker/setup-qemu-action@v3
