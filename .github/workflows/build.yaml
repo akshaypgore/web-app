@@ -23,7 +23,7 @@ jobs:
         id: get_version
         run: |
           echo "current_version=$(cat version.txt)" >> "$GITHUB_OUTPUT"
-          echo "upstream_version=$(git show HEAD~1:version.txt)" >> "$GITHUB_OUTPUT"
+          echo "upstream_version=$(git show master:version.txt)" >> "$GITHUB_OUTPUT"
       -
         name: Print versions
         run: |
@@ -53,15 +53,30 @@ jobs:
               # Exit the script with a failure status
               exit 1
           fi
-      # -
-      #   name: Set up QEMU
-      #   uses: docker/setup-qemu-action@v3
-      # -
-      #   name: Set up Docker Buildx
-      #   uses: docker/setup-buildx-action@v3
-      # -
-      #   name: Build and push
-      #   uses: docker/build-push-action@v6
-      #   with:
-      #     push: true
-      #     tags: akshaygore/web-app:${{ steps.get_version.outputs.version }}
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          load: true
+          tags: akshaygore/web-app:test
+      - name: Test
+        run: |
+          docker run --rm akshaygore/web-app:test nginx -t
+          if [ $? -eq 0 ]; then
+              echo "Nginx config is correct"
+          else
+              echo "Nginx config is incorrect"
+              exit 1
+          fi
+      -
+        name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: akshaygore/web-app:${{ steps.get_version.outputs.current_version }}
