@@ -21,6 +21,10 @@ jobs:
         id: get_version
         run: echo "version=$(cat version.txt)" >> "$GITHUB_OUTPUT"
       -
+        name: Read current version
+        id: current_version
+        run: echo "git show HEAD~1:version.txt" >> "$CURRENT_VERSION"
+      -
         name: Print version from file
         run: echo "${{ steps.get_version.outputs.version }}"
       -
