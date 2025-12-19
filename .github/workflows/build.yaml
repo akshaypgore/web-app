@@ -16,6 +16,8 @@ jobs:
       -
         name: Check out repository code
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
       - 
         name: Read version from file
         id: get_version
@@ -24,19 +26,19 @@ jobs:
         name: Read current version
         id: current_version
         run: |
-          git log
+          git show HEAD~1:version.txt
       -
         name: Print version from file
         run: echo "${{ steps.get_version.outputs.version }}"
-      -
-        name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      -
-        name: Build and push
-        uses: docker/build-push-action@v6
-        with:
-          push: true
-          tags: akshaygore/web-app:${{ steps.get_version.outputs.version }}
+      # -
+      #   name: Set up QEMU
+      #   uses: docker/setup-qemu-action@v3
+      # -
+      #   name: Set up Docker Buildx
+      #   uses: docker/setup-buildx-action@v3
+      # -
+      #   name: Build and push
+      #   uses: docker/build-push-action@v6
+      #   with:
+      #     push: true
+      #     tags: akshaygore/web-app:${{ steps.get_version.outputs.version }}
