@@ -24,7 +24,7 @@ jobs:
         name: Read current version
         id: current_version
         run: |
-          git show HEAD~1:version.txt
+          git log
       -
         name: Print version from file
         run: echo "${{ steps.get_version.outputs.version }}"
