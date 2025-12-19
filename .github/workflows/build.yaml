@@ -67,7 +67,7 @@ jobs:
           tags: akshaygore/web-app:test
       - name: Test
         run: |
-          docker run --rm akshaygore/web-app:test nginx -m
+          docker run --rm akshaygore/web-app:test nginx -t
           if [ $? -eq 0 ]; then
               echo "Nginx config is correct"
           else
