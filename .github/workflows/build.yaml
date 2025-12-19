@@ -45,7 +45,7 @@ jobs:
           }
 
           # Call the function and act on the result
-          if is_greater "${{ steps.get_version.outputs.upstream_version }}" "${{ steps.get_version.outputs.current_version }}"; then
+          if is_greater "${{ steps.get_version.outputs.current_version }}" "${{ steps.get_version.outputs.upstream_version }}" ; then
               echo "Success: Current version is greater than the required minimum."
               # Proceed with your application logic here
           else
