@@ -53,15 +53,24 @@ jobs:
               # Exit the script with a failure status
               exit 1
           fi
-      # -
-      #   name: Set up QEMU
-      #   uses: docker/setup-qemu-action@v3
-      # -
-      #   name: Set up Docker Buildx
-      #   uses: docker/setup-buildx-action@v3
-      # -
-      #   name: Build and push
-      #   uses: docker/build-push-action@v6
-      #   with:
-      #     push: true
-      #     tags: akshaygore/web-app:${{ steps.get_version.outputs.version }}
+      -
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          load: true
+          tags: akshaygore/web-app:test
+      - name: Test
+        run: |
+          docker run --rm akshaygore/web-app:test nginx -t
+      -
+        name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          push: true
+          tags: akshaygore/web-app:${{ steps.get_version.outputs.version }}
