@@ -27,8 +27,8 @@ jobs:
       -
         name: Print versions
         run: |
-          echo "${{ steps.get_version.outputs.current_version }}"
-          echo "${{ steps.get_version.outputs.upstream_version }}"
+          echo "current-app-version: ${{ steps.get_version.outputs.current_version }}"
+          echo "new-app-version: ${{ steps.get_version.outputs.upstream_version }}"
       -
         name: Compare versions
         run: |
