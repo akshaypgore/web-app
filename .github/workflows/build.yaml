@@ -7,6 +7,6 @@ on:
 
 jobs:
   call-reusable:
-    uses: akshaypgore/web-app/.github/workflows/develop-branch.yaml@master
+    uses: akshaypgore/ci-cd-workflows/.github/workflows/develop-branch.yaml@master
     with:
       branch: ${GITHUB_REF_NAME}
