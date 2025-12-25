@@ -9,4 +9,4 @@ jobs:
   call-reusable:
     uses: akshaypgore/ci-cd-workflows/.github/workflows/develop-branch.yaml@master
     with:
-      branch: ${GITHUB_REF_NAME}
+      branch: ${{ github.ref_name }}
