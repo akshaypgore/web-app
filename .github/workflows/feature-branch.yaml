@@ -1,0 +1,10 @@
+on:
+  push:
+    branches:
+      - 'feature/**'
+
+jobs:
+  call-reusable:
+    uses: akshaypgore/ci-cd-workflows/.github/workflows/develop-branch.yaml@master
+    with:
+      branch: ${{ github.ref_name }}
