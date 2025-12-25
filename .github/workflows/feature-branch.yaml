@@ -5,6 +5,6 @@ on:
 
 jobs:
   call-reusable:
-    uses: akshaypgore/ci-cd-workflows/.github/workflows/develop-branch.yaml@master
+    uses: akshaypgore/ci-cd-workflows/.github/workflows/feature-branch.yaml@master
     with:
       branch: ${{ github.ref_name }}
