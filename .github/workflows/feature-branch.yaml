@@ -9,4 +9,4 @@ jobs:
     secrets: inherit
     with:
       branch: ${{ github.ref_name }}
-      repo: ${{ github.repository }}
+      repo: ${{ github.event.repository.name }}
