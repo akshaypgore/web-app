@@ -6,7 +6,8 @@ on:
 jobs:
   call-reusable:
     permissions:
-      security-events: read  # Required to view code scanning results
+      security-events: write # Required to view code scanning results
+      actions: read
       contents: read         # Standard permission to checkout code
     uses: akshaypgore/ci-cd-workflows/.github/workflows/feature-branch.yaml@master
     secrets: inherit
