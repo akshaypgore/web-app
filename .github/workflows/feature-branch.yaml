@@ -8,3 +8,4 @@ jobs:
     uses: akshaypgore/ci-cd-workflows/.github/workflows/feature-branch.yaml@master
     with:
       branch: ${{ github.ref_name }}
+      repo: ${{ github.repository }}
