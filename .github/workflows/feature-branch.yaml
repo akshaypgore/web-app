@@ -10,3 +10,4 @@ jobs:
     with:
       branch: ${{ github.ref_name }}
       repo: ${{ github.event.repository.name }}
+      dockerhub_repo: "akshaygore"
