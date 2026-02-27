@@ -1,3 +1,5 @@
+name: Develop Branch - Build and Push
+
 on:
   pull_request:
     branches:
@@ -7,6 +9,7 @@ on:
 
 jobs:
   call-reusable:
-    uses: akshaypgore/ci-cd-workflows/.github/workflows/develop-branch.yaml@master
-    with:
-      branch: ${{ github.ref_name }}
+    uses: akshaypgore/ci-cd-workflows/.github/workflows/reusable-build-push.yaml@master
+    # secrets:
+    #   REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+    #   REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
