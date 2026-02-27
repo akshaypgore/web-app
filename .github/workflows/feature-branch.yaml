@@ -7,13 +7,10 @@ on:
 
 jobs:
   build-and-push:
-    uses: org/ci-cd-repo/.github/workflows/reusable-build-push.yml@main
-    secrets:
-      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
-      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}on:
-  push:
-    branches:
-      - 'feature/**'
+    uses: akshaypgore/ci-cd-workflows/.github/workflows/reusable-build-push.yml@master
+    # secrets:
+    #   REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+    #   REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
 
 # jobs:
 #   call-reusable:
