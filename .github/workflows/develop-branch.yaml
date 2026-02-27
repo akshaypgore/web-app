@@ -1,14 +1,20 @@
 name: Develop Branch - Build and Push
 
 on:
-  pull_request:
+  push:
     branches:
-      - 'develop'
-    types:
-      - closed
+      - develop
 
 jobs:
-  call-reusable:
+  update-version:
+    uses: akshaypgore/ci-cd-workflows/.github/workflows/reusable-version-update.yaml@master
+    with:
+      replace-from: SNAPSHOT
+      replace-to: DEV
+    # secrets: inherit
+
+  build-and-push:
+    needs: update-version
     uses: akshaypgore/ci-cd-workflows/.github/workflows/reusable-build-push.yaml@master
     # secrets:
     #   REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
