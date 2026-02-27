@@ -7,7 +7,7 @@ on:
 
 jobs:
   update-version:
-    uses: akshaypgore/ci-cd-workflows/.github/workflows/reusable-version-update.yml@master
+    uses: akshaypgore/ci-cd-workflows/.github/workflows/reusable-version-update.yaml@master
     with:
       replace-from: SNAPSHOT
       replace-to: DEV
@@ -15,7 +15,7 @@ jobs:
 
   build-and-push:
     needs: update-version
-    uses: akshaypgore/ci-cd-workflows/.github/workflows/reusable-build-push.yml@master
+    uses: akshaypgore/ci-cd-workflows/.github/workflows/reusable-build-push.yaml@master
     # secrets:
     #   REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
     #   REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
