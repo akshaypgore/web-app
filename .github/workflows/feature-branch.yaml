@@ -1,17 +1,29 @@
+name: Feature Branch - Build and Push
+
 on:
+  push:
+    branches:
+      - feature/**
+
+jobs:
+  build-and-push:
+    uses: org/ci-cd-repo/.github/workflows/reusable-build-push.yml@main
+    secrets:
+      REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+      REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}on:
   push:
     branches:
       - 'feature/**'
 
-jobs:
-  call-reusable:
-    permissions:
-      security-events: write # Required to view code scanning results
-      actions: read
-      contents: read         # Standard permission to checkout code
-    uses: akshaypgore/ci-cd-workflows/.github/workflows/feature-branch.yaml@master
-    secrets: inherit
-    with:
-      branch: ${{ github.ref_name }}
-      repo: ${{ github.event.repository.name }}
-      dockerhub_repo: "akshaygore"
+# jobs:
+#   call-reusable:
+#     permissions:
+#       security-events: write # Required to view code scanning results
+#       actions: read
+#       contents: read         # Standard permission to checkout code
+#     uses: akshaypgore/ci-cd-workflows/.github/workflows/feature-branch.yaml@master
+#     secrets: inherit
+#     with:
+#       branch: ${{ github.ref_name }}
+#       repo: ${{ github.event.repository.name }}
+#       dockerhub_repo: "akshaygore"
