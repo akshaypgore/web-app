@@ -1,0 +1,21 @@
+name: Release Branch - Update Version, Build and Push
+
+on:
+  push:
+    branches:
+      - release/**
+
+jobs:
+  update-version:
+    uses: akshaypgore/ci-cd-workflows/.github/workflows/reusable-version-update.yaml@master
+    with:
+      replace-from: DEV
+      replace-to: RC
+    # secrets: inherit
+
+  build-and-push:
+    needs: update-version
+    uses: akshaypgore/ci-cd-workflows/.github/workflows/reusable-build-push.yaml@master
+    # secrets:
+    #   REGISTRY_USERNAME: ${{ secrets.REGISTRY_USERNAME }}
+    #   REGISTRY_PASSWORD: ${{ secrets.REGISTRY_PASSWORD }}
